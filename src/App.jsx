@@ -1,16 +1,13 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { Outlet } from 'react-router-dom'
+import Navbar from './Components/Navbar.jsx'
 
+// Layout shell. Shared chrome (Navbar, toasts) goes around <Outlet />.
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <div>hello world</div>
-    </>
+    <div className="min-h-svh bg-stone-50">
+      <Navbar />
+      <Outlet />
+    </div>
   )
 }
 
