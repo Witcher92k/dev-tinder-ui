@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { addUser } from '../utils/userSlice'
+import { BASE_URL } from '../utils/constants';
 
 // No state here on purpose - inputs are uncontrolled and carry `name`
 // attributes so they can be read off the form, or swapped to controlled
@@ -22,7 +23,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        'http://localhost:3000/login',
+        `${BASE_URL}/login`,
         { emailId, password },
         { withCredentials: true }
       );

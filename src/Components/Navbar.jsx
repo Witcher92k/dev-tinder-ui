@@ -1,7 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
 import { removeUser } from '../utils/userSlice'
+import { BASE_URL } from '../utils/constants';
 
 function Navbar() {
 
@@ -12,7 +13,7 @@ function Navbar() {
     const handleLogout = async () => {
       try {
         await axios.post(
-          'http://localhost:3000/logout',
+          `${BASE_URL}/logout`,
           {},
           { withCredentials: true }
         );
@@ -40,6 +41,28 @@ function Navbar() {
 
 
         {user && (
+          <div className="flex items-center gap-6">
+            {[
+              { to: '/', label: 'Home' },
+              { to: '/requests', label: 'Requests' },
+              { to: '/connections', label: 'Connections' },
+            ].map(({ to, label }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={to === '/'}
+                className={({ isActive }) =>
+                  `relative py-1 text-sm font-medium transition ${
+                    isActive
+                      ? 'text-stone-900 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-gradient-to-r after:from-rose-500 after:to-violet-500'
+                      : 'text-stone-600 hover:text-stone-900'
+                  }`
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -71,6 +94,7 @@ function Navbar() {
                 <button onClick={handleLogout}>Log out</button>
               </li>
             </ul>
+          </div>
           </div>
         )}
 

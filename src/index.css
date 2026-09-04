@@ -1,2 +1,18 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* feed carousel card transitions - skipped for reduced-motion users */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes card-enter-next {
+    from { opacity: 0; transform: translateX(28px) scale(0.98); }
+  }
+  @keyframes card-enter-prev {
+    from { opacity: 0; transform: translateX(-28px) scale(0.98); }
+  }
+  .card-enter-next { animation: card-enter-next 0.3s cubic-bezier(0.2, 0.7, 0.3, 1); }
+  .card-enter-prev { animation: card-enter-prev 0.3s cubic-bezier(0.2, 0.7, 0.3, 1); }
+}
+
+/* hide the horizontal scrollbar under the filter pills */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
